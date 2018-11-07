@@ -2,23 +2,31 @@ package objs
 
 import (
 	"bytes"
-	"crypto/sha256"
 	"strconv"
 	"time"
+	"crypto/sha256"
 )
 
 type Block struct {
 	Timestamp     int64
 	Data          []byte
-	PrevBlockHash []byte
 	Hash          []byte
+	PrevBlockHash []byte
+}
+
+func (b *Block) SetHash() {
+	timestamp := []byte(strconv.FormatInt(b.Timestamp, 10))
+	data := bytes.Join([][]byte{timestamp, b.PrevBlockHash, b.Data}, []byte{})
+	hash := sha256.Sum256(data)
+	b.Hash = hash[:]
+
 }
 
 func NewBlock(data string, prevBlockHash []byte) *Block {
 	block := Block{
 		Timestamp:     time.Now().Unix(),
-		Data:          []byte(data),
 		PrevBlockHash: prevBlockHash,
+		Data:          []byte(data),
 		Hash:          []byte{},
 	}
 	block.SetHash()
@@ -26,12 +34,5 @@ func NewBlock(data string, prevBlockHash []byte) *Block {
 }
 
 func NewGenesisBlock() *Block {
-	return NewBlock("Genesis Block", []byte{})
-}
 
-func (b *Block) SetHash() {
-	timestamp := []byte(strconv.FormatInt(b.Timestamp, 10))
-	header := bytes.Join([][]byte{b.Hash, b.PrevBlockHash, timestamp}, []byte{})
-	hash := sha256.Sum256(header)
-	b.Hash = hash[:]
 }
