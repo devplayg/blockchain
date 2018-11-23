@@ -19,7 +19,6 @@ func (b *Block) SetHash() {
 	data := bytes.Join([][]byte{timestamp, b.PrevBlockHash, b.Data}, []byte{})
 	hash := sha256.Sum256(data)
 	b.Hash = hash[:]
-
 }
 
 func NewBlock(data string, prevBlockHash []byte) *Block {
@@ -34,5 +33,6 @@ func NewBlock(data string, prevBlockHash []byte) *Block {
 }
 
 func NewGenesisBlock() *Block {
-
+	block := NewBlock("Genesis block", nil)
+	return block
 }
