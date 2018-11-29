@@ -23,9 +23,9 @@ func (b *Block) SetHash() {
 
 func NewBlock(data string, prevBlockHash []byte) *Block {
 	block := Block{
-		Timestamp:     time.Now().Unix(),
 		PrevBlockHash: prevBlockHash,
 		Data:          []byte(data),
+		Timestamp:     time.Now().Unix(),
 		Hash:          []byte{},
 	}
 	block.SetHash()

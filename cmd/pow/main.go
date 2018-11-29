@@ -1,12 +1,13 @@
 package main
 
-import "fmt"
+import "github.com/davecgh/go-spew/spew"
 
 func main() {
 
 	blockchain := NewBlockchain()
 	for _, b := range blockchain.Blocks {
-		fmt.Printf("%d - %s (%s)\n", b.Timestamp, b.Data, b.Hash)
+		//fmt.Printf("%d - %s (%s)\n", b.Timestamp, b.Data, b.Hash)
+		spew.Dump(b)
 	}
 
 	//v := uint32(500)

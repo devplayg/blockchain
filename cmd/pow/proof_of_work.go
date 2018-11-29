@@ -3,6 +3,8 @@ package main
 import (
 	"math/big"
 	"math"
+	"bytes"
+	"crypto/sha256"
 )
 
 var (
@@ -27,20 +29,54 @@ func NewProofOfWork(block *Block) *ProofOfWork {
 	return pow
 }
 
-func (p *ProofOfWork) Run() (int, []byte) {
-	nonce := 1
-	var hash []byte
+func (p *ProofOfWork) Run() ([]byte, int) {
+	var hashInt big.Int
+	var hash [32]byte
+	nonce := 0
 
 	for nonce < maxNonce {
-		p.prepareData(nonce)
+		data := p.prepareData(nonce)
+		hash = sha256.Sum256(data)
+		hashInt.SetBytes(hash[:])
 
+		//fmt.Printf("\r%x", hash)
 
-		nonce++
+		if hashInt.Cmp(p.target) == -1 {
+			break
+		} else {
+			nonce++
+		}
+
+		//break
+
+		//p.Run()
+		//hash, nonce := p.Run()
+		//if p.isValidBlock() {
+		//	break
+		//} else {
+		//	nonce++
+		//}
+		//nonce++
+		//time.Sleep(1500 * time.Millisecond)
 	}
 
-	return nonce, hash
+	return hash[:], nonce
 }
 
-func (p *ProofOfWork) prepareData(nonce int) {
-	//p.block.Nonce = nonce
+func (p *ProofOfWork) prepareData(nonce int) []byte {
+	//spew.Printf("%x / %x / %d / %d / %d\n", p.block.PrevBlockHash, p.block.Data, p.block.Timestamp, targetBits, nonce)
+
+	b := bytes.Join([][]byte{
+		p.block.PrevBlockHash,
+		p.block.Data,
+		Int64ToHex(p.block.Timestamp),
+		Int64ToHex(int64(targetBits)),
+		Int64ToHex(int64(nonce)),
+	}, []byte{})
+
+	return b
+}
+
+func (p *ProofOfWork) isValidBlock() bool {
+	return true
 }

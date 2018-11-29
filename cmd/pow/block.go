@@ -3,14 +3,13 @@ package main
 import (
 	"time"
 	"bytes"
-	"github.com/davecgh/go-spew/spew"
 )
 
 type Block struct {
 	Timestamp int64
 	Data      []byte
 	PrevBlockHash []byte
-	Nonce     int64
+	Nonce     int
 	Hash      []byte
 }
 
@@ -33,13 +32,16 @@ func NewBlock(data string, prevBlockHash []byte) *Block {
 
 	// Pow
 	pow:= NewProofOfWork(block)
-	//spew.Dump(pow)
-	//pow.
-	nonce, hash := pow.Run()
-	block.Nonce = nonce
+	hash, nonce := pow.Run()
 	block.Hash = hash
+	block.Nonce = nonce // 11304936
+	//spew.Dump(block)
+	//pow.
+	//nonce, hash := pow.Run()
+	//block.Nonce = nonce
+	//block.Hash = hash
 
-	spew.Dump(block)
+	//spew.Dump(block)
 	//nonce, hash := NewProofOfWork()
 	//block.Hash = hash
 	//block.Nonce = nonce
@@ -52,5 +54,5 @@ func NewBlock(data string, prevBlockHash []byte) *Block {
 
 
 func NewGenesisBlock() *Block {
-	return NewBlock("Genesis B lock", nil)
+	return NewBlock("Genesis Block", nil)
 }
