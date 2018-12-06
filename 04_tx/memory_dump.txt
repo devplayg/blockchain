@@ -1,0 +1,154 @@
+(*main.Block)(0xc000094b60)({
+ Timestamp:
+ Transactions:
+  (*main.Transaction)(0xc0000a8360)({
+   ID:     00000000  0e 86 eb d5 33 39 13 8b  5a ec fd 22 a6 5f ee 30  |....39..Z.."._.0|
+   Vin: ([]main.TXInput) (len=1 cap=1) {
+    (main.TXInput) {
+     Txid:
+      00000000  65 30 10 67 0c b5 49 3b  23 83 6e d0 dc e3 63 5d  |e0.g..I;#.n...c]|
+     },
+     Vout: (int) 1,
+     ScriptSig: (string) (len=3) "won",
+     Text: (string) (len=20) "(fron=won,account=3)"
+    }
+   Vout: ([]main.TXOutput) (len=1 cap=1) {
+    (main.TXOutput) {
+     Value: (int) 3,
+     ScriptPubKey: (string) (len=1) "C",
+     Text: (string) (len=15) "(to=C,amount=3)"
+    }
+   Text: (string) (len=16) "won sends 3 to C"
+  })
+ },
+ PrevBlockHash:
+  00000000  36 f6 64 09 f3 65 76 08  7e be 85 73 6a c5 ed e5  |6.d..ev.~..sj...|
+ Hash:
+  00000000  22 a3 38 a0 d7 4f 29 0b  10 cf c0 c4 e0 b5 16 95  |".8..O).........|
+ Text: (string) (len=57) "#TX-in: (fron=won,account=3), / #TX-out: (to=C,amount=3),"
+======================================================= xxx
+(*main.Block)(0xc000095500)({
+ Timestamp:
+ Transactions:
+  (*main.Transaction)(0xc0000a84e0)({
+   ID:     00000000  65 30 10 67 0c b5 49 3b  23 83 6e d0 dc e3 63 5d  |e0.g..I;#.n...c]|
+   Vin: ([]main.TXInput) (len=1 cap=1) {
+    (main.TXInput) {
+     Txid:
+      00000000  92 58 ec bf 7e 89 b9 53  31 48 69 b2 61 a7 96 80  |.X..~..S1Hi.a...|
+     },
+     Vout: (int) 1,
+     ScriptSig: (string) (len=3) "won",
+     Text: (string) (len=20) "(fron=won,account=5)"
+    }
+   Vout: ([]main.TXOutput) (len=2 cap=2) {
+    (main.TXOutput) {
+     Value: (int) 2,
+     ScriptPubKey: (string) (len=1) "B",
+     Text: (string) (len=15) "(to=B,amount=2)"
+    },
+    (main.TXOutput) {
+     Value: (int) 3,
+     ScriptPubKey: (string) (len=3) "won",
+     Text: (string) (len=23) "(formular=5-2,from=won)"
+    }
+   Text: (string) (len=16) "won sends 2 to B"
+  })
+ },
+ PrevBlockHash:
+  00000000  32 cd b6 df 2b cd 7d 33  28 52 ae 4b e7 65 b4 4e  |2...+.}3(R.K.e.N|
+ Hash:
+  00000000  36 f6 64 09 f3 65 76 08  7e be 85 73 6a c5 ed e5  |6.d..ev.~..sj...|
+ Text: (string) (len=81) "#TX-in: (fron=won,account=5), / #TX-out: (to=B,amount=2),(formular=5-2,from=won),"
+
+
+(*main.Block)(0xc000095ea0)({
+ Timestamp:
+ Transactions:
+  (*main.Transaction)(0xc0000a8540)({
+   ID:     00000000  92 58 ec bf 7e 89 b9 53  31 48 69 b2 61 a7 96 80  |.X..~..S1Hi.a...|
+   Vin: ([]main.TXInput) (len=1 cap=1) {
+    (main.TXInput) {
+     Txid:
+      00000000  79 27 c2 f8 0c 80 2d 13  56 59 1d 7d f9 df d0 f8  |y'....-.VY.}....|
+     Vout: (int) 1,
+     ScriptSig: (string) (len=3) "won",
+     Text: (string) (len=20) "(fron=won,account=6)"
+    }
+   Vout: ([]main.TXOutput) (len=2 cap=2) {
+    (main.TXOutput) {
+     Value: (int) 1,
+     ScriptPubKey: (string) (len=1) "A",
+     Text: (string) (len=15) "(to=A,amount=1)"
+    },
+    (main.TXOutput) {
+     Value: (int) 5,
+     ScriptPubKey: (string) (len=3) "won",
+     Text: (string) (len=23) "(formular=6-1,from=won)"
+    }
+   Text: (string) (len=16) "won sends 1 to A"
+  })
+ },
+ PrevBlockHash:
+  00000000  83 b6 d2 92 82 19 af c1  05 fe 8d 84 a1 51 e8 90  |.............Q..|
+ Hash:
+  00000000  32 cd b6 df 2b cd 7d 33  28 52 ae 4b e7 65 b4 4e  |2...+.}3(R.K.e.N|
+ Text: (string) (len=81) "#TX-in: (fron=won,account=6), / #TX-out: (to=A,amount=1),(formular=6-1,from=won),"
+======================================================= xxx
+(*main.Block)(0xc0000f6850)({
+ Timestamp:
+ Transactions:
+  (*main.Transaction)(0xc0000a85a0)({
+   ID:     00000000  79 27 c2 f8 0c 80 2d 13  56 59 1d 7d f9 df d0 f8  |y'....-.VY.}....|
+   Vin: ([]main.TXInput) (len=1 cap=1) {
+    (main.TXInput) {
+     Txid:
+      00000000  73 0e 02 e7 3b ec 3a 83  6d fe bf 10 70 53 27 e2  |s...;.:.m...pS'.|
+     Vout: (int) 0,
+     ScriptSig: (string) (len=3) "won",
+     Text: (string) (len=21) "(fron=won,account=10)"
+    }
+   Vout: ([]main.TXOutput) (len=2 cap=2) {
+    (main.TXOutput) {
+     Value: (int) 4,
+     ScriptPubKey: (string) (len=1) "D",
+     Text: (string) (len=15) "(to=D,amount=4)"
+    },
+    (main.TXOutput) {
+     Value: (int) 6,
+     ScriptPubKey: (string) (len=3) "won",
+     Text: (string) (len=24) "(formular=10-4,from=won)"
+    }
+   Text: (string) (len=16) "won sends 4 to D"
+ },
+ PrevBlockHash:
+  00000000  c4 bd e9 99 c2 2c c0 4a  e6 86 94 e9 8a c3 60 ba  |.....,.J......`.|
+ Hash:
+  00000000  83 b6 d2 92 82 19 af c1  05 fe 8d 84 a1 51 e8 90  |.............Q..|
+ Text: (string) (len=83) "#TX-in: (fron=won,account=10), / #TX-out: (to=D,amount=4),(formular=10-4,from=won),"
+======================================================= xxx
+(*main.Block)(0xc0000f71f0)({
+ Timestamp:
+ Transactions:
+  (*main.Transaction)(0xc0000a8600)({
+   ID:    00000000  73 0e 02 e7 3b ec 3a 83  6d fe bf 10 70 53 27 e2  |s...;.:.m...pS'.|
+   Vin: ([]main.TXInput) (len=1 cap=1) {
+    (main.TXInput) {
+     Txid: ([]uint8) <nil>,
+     Vout: (int) -1,
+     ScriptSig: (string) (len=69) "The Times 03/Jan/2009 Chancellor on brink of second bailout for banks",
+     Text: (string) (len=84) "to: won, data: The Times 03/Jan/2009 Chancellor on brink of second bailout for banks"
+    }
+   Vout: ([]main.TXOutput) (len=1 cap=1) {
+    (main.TXOutput) {
+     Value: (int) 10,
+     ScriptPubKey: (string) (len=3) "won",
+     Text: (string) (len=84) "to: won, data: The Times 03/Jan/2009 Chancellor on brink of second bailout for banks"
+    }
+   },
+   Text: (string) ""
+ },
+ PrevBlockHash: ([]uint8) <nil>,
+ Hash:
+  00000000  c4 bd e9 99 c2 2c c0 4a  e6 86 94 e9 8a c3 60 ba  |.....,.J......`.|
+ Text: (string) (len=190) "#TX-in: to: won, data: The Times 03/Jan/2009 Chancellor on brink of second bailout for banks, / #TX-out: to: won, data: The Times 03/Jan/2009 Chancellor on brink of second bailout for banks,"

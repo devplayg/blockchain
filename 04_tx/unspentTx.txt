@@ -1,0 +1,32 @@
+([]main.Transaction) (len=1 cap=1) {
+ (main.Transaction) {
+  ID: ([]uint8) (len=32 cap=32) {
+   00000000  92 58 ec bf 7e 89 b9 53  31 48 69 b2 61 a7 96 80  |.X..~..S1Hi.a...|
+   00000010  3f a6 da c6 78 15 e4 60  48 30 b9 d6 cd ca 2b a5  |?...x..`H0....+.|
+  },
+  Vin: ([]main.TXInput) (len=1 cap=1) {
+   (main.TXInput) {
+    Txid: ([]uint8) (len=32 cap=32) {
+     00000000  79 27 c2 f8 0c 80 2d 13  56 59 1d 7d f9 df d0 f8  |y'....-.VY.}....|
+     00000010  36 a3 bd 6e 59 a3 4f 84  84 d9 d2 cc 30 03 33 45  |6..nY.O.....0.3E|
+    },
+    Vout: (int) 1,
+    ScriptSig: (string) (len=3) "won",
+    Text: (string) (len=20) "(fron=won,account=6)"
+   }
+  },
+  Vout: ([]main.TXOutput) (len=2 cap=2) {
+   (main.TXOutput) {
+    Value: (int) 1,
+    ScriptPubKey: (string) (len=1) "A",
+    Text: (string) (len=15) "(to=A,amount=1)"
+   },
+   (main.TXOutput) {
+    Value: (int) 5,
+    ScriptPubKey: (string) (len=3) "won",
+    Text: (string) (len=23) "(formular=6-1,from=won)"
+   }
+  },
+  Text: (string) (len=16) "won sends 1 to A"
+ }
+}

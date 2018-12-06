@@ -1,14 +1,56 @@
 package main
 
-import "github.com/davecgh/go-spew/spew"
+import (
+	"fmt"
+	"strconv"
+)
 
 func main() {
+	bc := NewBlockchain()
+	defer bc.db.Close()
+	//for _, b := range blockchain.Blocks {
+		//fmt.Printf("%d - %s (%s) (%3.1fs)\n", b.Timestamp, b.Data, b.Hash, b.dur.Seconds())
+		//spew.Dump(b)
+	//}
 
-	blockchain := NewBlockchain()
-	for _, b := range blockchain.Blocks {
-		//fmt.Printf("%d - %s (%s)\n", b.Timestamp, b.Data, b.Hash)
-		spew.Dump(b)
+	bc.AddBlock("hello world! what's your name?")
+	bc.AddBlock("my name is won")
+
+	cli := CLI{bc}
+
+	bci := cli.bc.Iterator()
+
+	for {
+		block := bci.Next()
+
+		fmt.Printf("Prev. hash: %x\n", block.PrevBlockHash)
+		fmt.Printf("Data: %s\n", block.Data)
+		fmt.Printf("Hash: %x\n", block.Hash)
+		pow := NewProofOfWork(block)
+		fmt.Printf("PoW: %s\n", strconv.FormatBool(pow.Validate()))
+		//fmt.Println()
+
+		if len(block.PrevBlockHash) == 0 {
+			break
+		}
 	}
+
+	//
+	//
+	//b := Block{
+	//	Hash: []byte("ab0123"),
+	//	Nonce: 3,
+	//	Timestamp: time.Now().Unix(),
+	//}
+	//
+	////b.se
+	//
+	//data := b.Serialize()
+	////spew.Dump(b)
+	////spew.Dump(data)
+	//
+	//b2 := DeserializeBlock(data)
+	//spew.Dump(b2)
 
 	//v := uint32(500)
 	//buf := make([]byte, 4)
@@ -19,7 +61,6 @@ func main() {
 	//spew.Dump(x )
 	//
 	//binary.Write()
-
 	//spew.Dump(Int64ToHex(1))
 	//spew.Dump(Int64ToHex(10000000000000000000000000000))
 }

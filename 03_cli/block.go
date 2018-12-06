@@ -3,6 +3,8 @@ package main
 import (
 	"time"
 	"bytes"
+	"encoding/gob"
+	log "github.com/sirupsen/logrus"
 )
 
 type Block struct {
@@ -11,15 +13,44 @@ type Block struct {
 	PrevBlockHash []byte
 	Nonce     int
 	Hash      []byte
+	dur time.Duration
 }
 
+func (b *Block) Serialize() []byte {
+	//var network bytes.Buffer        // Stand-in for a network connection
+	//enc := gob.NewEncoder(&network) // Will write to network.
+	//dec := gob.NewDecoder(&network) // Will read from network.
+	//err := enc.Encode(P{3, 4, 5, "Pythagoras"})
+	//if err != nil {
+	//	log.Fatal("encode error:", err)
+	//}
+	// Decode (receive) the value.
+	//var q Q
+	//err = dec.Decode(&q)
+	//var buf []byte
+	//w := buffer.NewWriter(buf)
+	//gob.NewEncoder(w)
 
-func (b *Block) SetHash() {
-	b.Hash = bytes.Join([][]byte{
+	var buf bytes.Buffer
+	enc := gob.NewEncoder(&buf)
+	err := enc.Encode(b)
+	if err != nil {
+		log.Error(err)
+	}
 
-		//b.Timestamp,
-	}, []byte{})
+	return buf.Bytes()
 }
+
+func DeserializeBlock(data []byte) *Block {
+	var block Block
+	dec := gob.NewDecoder(bytes.NewReader(data))
+	err := dec.Decode(&block)
+	if err != nil {
+		log.Error(err)
+	}
+	return &block
+}
+
 
 
 func NewBlock(data string, prevBlockHash []byte) *Block {
@@ -32,22 +63,10 @@ func NewBlock(data string, prevBlockHash []byte) *Block {
 
 	// Pow
 	pow:= NewProofOfWork(block)
-	hash, nonce := pow.Run()
+	hash, nonce, dur := pow.Run() // 26268650
 	block.Hash = hash
+	block.dur = dur
 	block.Nonce = nonce // 11304936
-	//spew.Dump(block)
-	//pow.
-	//nonce, hash := pow.Run()
-	//block.Nonce = nonce
-	//block.Hash = hash
-
-	//spew.Dump(block)
-	//nonce, hash := NewProofOfWork()
-	//block.Hash = hash
-	//block.Nonce = nonce
-	// Set nance
-	// Set Hash
-
 
 	return block
 }

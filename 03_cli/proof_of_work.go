@@ -1,15 +1,18 @@
 package main
 
 import (
-	"math/big"
-	"math"
 	"bytes"
 	"crypto/sha256"
+	"fmt"
+	"math"
+	"math/big"
+	"time"
 )
 
 var (
 	maxNonce = math.MaxInt64
 )
+
 const targetBits = 24 // 3 bytes(first 000000)
 
 type ProofOfWork struct {
@@ -19,48 +22,38 @@ type ProofOfWork struct {
 
 func NewProofOfWork(block *Block) *ProofOfWork {
 	target := big.NewInt(1)
-	target.Lsh(target, 256 - targetBits)
+	target.Lsh(target, 256-targetBits)
 
 	pow := &ProofOfWork{
-		block: block,
+		block:  block,
 		target: target,
 	}
 
 	return pow
 }
 
-func (p *ProofOfWork) Run() ([]byte, int) {
+func (p *ProofOfWork) Run() ([]byte, int, time.Duration) {
 	var hashInt big.Int
 	var hash [32]byte
-	nonce := 0
+	nonce := 26168650 // 26268650
 
+	t := time.Now()
 	for nonce < maxNonce {
 		data := p.prepareData(nonce)
 		hash = sha256.Sum256(data)
 		hashInt.SetBytes(hash[:])
-
-		//fmt.Printf("\r%x", hash)
+		fmt.Printf("\r%x", hash)
 
 		if hashInt.Cmp(p.target) == -1 {
 			break
 		} else {
 			nonce++
 		}
-
-		//break
-
-		//p.Run()
-		//hash, nonce := p.Run()
-		//if p.isValidBlock() {
-		//	break
-		//} else {
-		//	nonce++
-		//}
-		//nonce++
-		//time.Sleep(1500 * time.Millisecond)
+		break
 	}
 
-	return hash[:], nonce
+	dur := time.Since(t)
+	return hash[:], nonce, dur
 }
 
 func (p *ProofOfWork) prepareData(nonce int) []byte {
@@ -77,6 +70,21 @@ func (p *ProofOfWork) prepareData(nonce int) []byte {
 	return b
 }
 
-func (p *ProofOfWork) isValidBlock() bool {
-	return true
+func (p *ProofOfWork) Validate() bool {
+	var hashInt big.Int
+	data := p.prepareData(p.block.Nonce)
+	hash := sha256.Sum256(data)
+	hashInt.SetBytes(hash[:])
+	//spew.Dump(hashInt)
+	return hashInt.Cmp(p.target) == -1
+
+	//var hashInt big.Int
+	//
+	//data := p.prepareData(p.block.Nonce)
+	//hash := sha256.Sum256(data)
+	//hashInt.SetBytes(hash[:])
+	//
+	//isValid := hashInt.Cmp(p.target) == -1
+	//
+	//return isValid
 }
